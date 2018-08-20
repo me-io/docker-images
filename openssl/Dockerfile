@@ -8,10 +8,11 @@ MAINTAINER Mohamed Meabed <meabed@me.io>
 ENV DEBIAN_FRONTEND noninteractive
 RUN export LANG=C.UTF-8 && export LC_ALL=en_US.UTF-8
 
-RUN apt-get install -y          \
-    build-essential             \
-    pkg-config                  \
-    libsslcommon2-dev           \
+RUN apt-get update &&  \
+    apt-get install -y \
+    build-essential    \
+    pkg-config         \
+    libsslcommon2-dev  \
     wget
 
 RUN apt-get build-dep -y \
