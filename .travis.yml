@@ -1,0 +1,29 @@
+dist: trusty
+
+sudo: required
+
+language: ruby
+
+services:
+- docker
+
+before_install:
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+- sudo apt-get update
+- sudo apt-get -y install docker-ce
+
+cache:
+  bundler: true
+  directories:
+  - $HOME/docker
+
+#before_script:
+#  - do something :)
+
+script:
+- openssl/build_ubuntu.sh
+
+
+#after_success:
+#- update the readme and tags etc...
