@@ -20,7 +20,7 @@ ARG OPENSSL_PREFIX
 #
 # Download OpenSSL, verify, build, test, install
 #
-RUN wget -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/${OPENSSL_VER}.tar.gz && \
+RUN wget -Oq ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/${OPENSSL_VER}.tar.gz && \
     tar xfz ${OPENSSL_VER}.tar.gz && \
     cd ${OPENSSL_VER} && \
     ./config shared --openssldir=${OPENSSL_PREFIX} && \
