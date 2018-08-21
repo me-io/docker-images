@@ -8,12 +8,14 @@ MAINTAINER Mohamed Meabed <meabed@me.io>
 ENV DEBIAN_FRONTEND noninteractive
 RUN export LANG=C.UTF-8 && export LC_ALL=en_US.UTF-8
 
-RUN apt-get update &&  \
-    apt-get -qq install -y \
-    build-essential    \
-    pkg-config         \
-    libsslcommon2-dev  \
+ENV BUILD_PACKAGES \
+    build-essential \
+    pkg-config \
+    libsslcommon2-dev \
     wget
+
+RUN apt-get update &&  \
+    apt-get -qq install -y ${BUILD_PACKAGES}
 
 ARG OPENSSL_VER
 ARG OPENSSL_PREFIX
@@ -33,4 +35,4 @@ RUN openssl version -a && \
     echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n"
 
 # Clean up APT when done.
-RUN apt-get clean autoclean && apt-get autoremove -y && rm -rf /tmp/* /var/tmp/* /var/lib/{apt,dpkg,cache,log}/
+RUN apt-get remove --purge -y ${BUILD_PACKAGES} && apt-get clean autoclean && apt-get autoremove -y && rm -rf /tmp/* /var/tmp/* /var/lib/{apt,dpkg,cache,log}/
