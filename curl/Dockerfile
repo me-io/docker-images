@@ -37,4 +37,4 @@ RUN openssl version -a && \
     echo -e "\n\nSuccess: Installed ${CURL_VER} in ${CURL_PREFIX}\n"
 
 # Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && rm -rf /var/lib/{apt,dpkg,cache,log}/
