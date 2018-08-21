@@ -23,6 +23,8 @@ cache:
 
 script:
 - openssl/build_ubuntu.sh
+- curl/build_ubuntu.sh
+- curl/build_ubuntu_openssl.sh
 
 
 #after_success:
