@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN export LANG=C.UTF-8 && export LC_ALL=en_US.UTF-8
 
 RUN apt-get update &&  \
-    apt-get install -y \
+    apt-get -q install -y \
     build-essential    \
     pkg-config         \
     libsslcommon2-dev  \
