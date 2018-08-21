@@ -29,7 +29,7 @@ RUN wget -O ${CURL_VER}.tar.gz https://curl.haxx.se/download/${CURL_VER}.tar.gz 
     LDFLAGS="-Wl,-rpath,$OPENSSL_PREFIX/lib -Wl,-rpath,${CURL_PREFIX}/lib" ./configure --with-ssl --prefix=${CURL_PREFIX} && \
     make > /dev/null && \
     make test && \
-    make install && \
+    make install > /dev/null && \
     ldconfig
 
 RUN openssl version -a && \

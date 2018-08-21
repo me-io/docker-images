@@ -26,7 +26,7 @@ RUN wget -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/${OPENSSL_VER}.
     ./config shared --openssldir=${OPENSSL_PREFIX} && \
     make > /dev/null && \
     make test && \
-    make install && \
+    make install > /dev/null && \
     ldconfig
 
 RUN openssl version -a && \
