@@ -22,7 +22,7 @@ ARG OPENSSL_PREFIX
 #
 # Download OpenSSL, verify, build, test, install
 #
-RUN wget -Oq ${CURL_VER}.tar.gz https://curl.haxx.se/download/${CURL_VER}.tar.gz && \
+RUN wget -q -O ${CURL_VER}.tar.gz https://curl.haxx.se/download/${CURL_VER}.tar.gz && \
     tar xfz ${CURL_VER}.tar.gz && \
     cd ${CURL_VER} && \
     ldconfig && \
