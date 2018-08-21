@@ -13,24 +13,28 @@ RUN apt-get update &&  \
     build-essential    \
     pkg-config         \
     libsslcommon2-dev  \
+    libcurl4-openssl-dev  \
     wget
 
-ARG OPENSSL_VER
+ARG CURL_VER
+ARG CURL_PREFIX
 ARG OPENSSL_PREFIX
 #
 # Download OpenSSL, verify, build, test, install
 #
-RUN wget -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/${OPENSSL_VER}.tar.gz && \
-    tar xfz ${OPENSSL_VER}.tar.gz && \
-    cd ${OPENSSL_VER} && \
-    ./config shared --openssldir=${OPENSSL_PREFIX} && \
+RUN wget -O ${CURL_VER}.tar.gz https://curl.haxx.se/download/${CURL_VER}.tar.gz && \
+    tar xfz ${CURL_VER}.tar.gz && \
+    cd ${CURL_VER} && \
+    ldconfig && \
+    LDFLAGS="-Wl,-rpath,$OPENSSL_PREFIX/lib -Wl,-rpath,${CURL_PREFIX}/lib" ./configure --with-ssl --prefix=${CURL_PREFIX} && \
     make > /dev/null && \
     make test && \
     make install && \
     ldconfig
 
 RUN openssl version -a && \
-    echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n"
+    curl --version && \
+    echo -e "\n\nSuccess: Installed ${CURL_VER} in ${CURL_PREFIX}\n"
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
