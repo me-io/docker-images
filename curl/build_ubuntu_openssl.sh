@@ -2,14 +2,15 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # https://hub.docker.com/_/ubuntu/
-IMG_NAME="ubuntu"
-IMG_TAG="16.04"
-# https://www.openssl.org/source/
-OPENSSL_VER="openssl-1.1.0i"
+IMG_NAME="meio/ubuntu"
+IMG_TAG="openssl-1.1.0i"
+# https://curl.haxx.se/docs/releases.html
+CURL_VER="curl-7.61.0"
+CURL_PREFIX="/usr/local"
 OPENSSL_PREFIX="/usr/local/ssl"
 # docker hub image_name:tag
 REPO_NAME="meio/ubuntu"
-REPO_TAG=${IMG_TAG}-${OPENSSL_VER}
+REPO_TAG=${IMG_TAG}-${CURL_VER}
 
 if [[ ! -z "${DOCKER_PASSWORD}" && ! -z "${DOCKER_USERNAME}" ]]
 then
@@ -25,7 +26,8 @@ fi
 
 docker build --build-arg IMG_NAME=${IMG_NAME} \
              --build-arg IMG_TAG=${IMG_TAG} \
-             --build-arg OPENSSL_VER=${OPENSSL_VER} \
+             --build-arg CURL_VER=${CURL_VER} \
+             --build-arg CURL_PREFIX=${CURL_PREFIX} \
              --build-arg OPENSSL_PREFIX=${OPENSSL_PREFIX} \
              -t ${REPO_NAME}:${REPO_TAG} ${DIR}
 
