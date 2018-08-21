@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN export LANG=C.UTF-8 && export LC_ALL=en_US.UTF-8
 
 RUN apt-get update &&  \
-    apt-get -q install -y \
+    apt-get -qq install -y \
     build-essential    \
     pkg-config         \
     libsslcommon2-dev  \
@@ -22,9 +22,9 @@ ARG OPENSSL_PREFIX
 #
 # Download OpenSSL, verify, build, test, install
 #
-RUN wget -q -O ${CURL_VER}.tar.gz https://curl.haxx.se/download/${CURL_VER}.tar.gz && \
-    tar xfz ${CURL_VER}.tar.gz && \
-    cd ${CURL_VER} && \
+RUN wget -q -O /tmp/${CURL_VER}.tar.gz https://curl.haxx.se/download/${CURL_VER}.tar.gz && \
+    tar xfz /tmp/${CURL_VER}.tar.gz && \
+    cd /tmp/${CURL_VER} && \
     ldconfig && \
     LDFLAGS="-Wl,-rpath,$OPENSSL_PREFIX/lib -Wl,-rpath,${CURL_PREFIX}/lib" ./configure --with-ssl --prefix=${CURL_PREFIX} && \
     make > /dev/null && \
@@ -37,4 +37,4 @@ RUN openssl version -a && \
     echo -e "\n\nSuccess: Installed ${CURL_VER} in ${CURL_PREFIX}\n"
 
 # Clean up APT when done.
-RUN apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && rm -rf /var/lib/{apt,dpkg,cache,log}/
+RUN apt-get clean autoclean && apt-get autoremove -y && rm -rf /tmp/* /var/tmp/* /var/lib/{apt,dpkg,cache,log}/

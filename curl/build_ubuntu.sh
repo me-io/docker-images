@@ -10,7 +10,7 @@ CURL_PREFIX="/usr/local"
 OPENSSL_PREFIX="/usr/local/ssl"
 # docker hub image_name:tag
 REPO_NAME="meio/ubuntu"
-REPO_TAG=${CURL_VER}
+REPO_TAG=${IMG_TAG}-${CURL_VER}
 
 if [[ ! -z "${DOCKER_PASSWORD}" && ! -z "${DOCKER_USERNAME}" ]]
 then
