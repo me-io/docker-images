@@ -25,10 +25,12 @@ RUN wget -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/${OPENSSL_VER}.
     cd ${OPENSSL_VER} && \
     ./config shared --openssldir=${OPENSSL_PREFIX} && \
     make && \
-    # make test && \
+    make test && \
     make install && \
-    ldconfig && \
-    cd .. && \
-    echo -e "\n\n" && \
-    /usr/local/bin/openssl version -a && \
+    ldconfig
+
+RUN openssl version -a && \
     echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n"
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
