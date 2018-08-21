@@ -15,9 +15,6 @@ RUN apt-get update &&  \
     libsslcommon2-dev  \
     wget
 
-RUN apt-get build-dep -y \
-    openssl
-
 ARG OPENSSL_VER
 ARG OPENSSL_PREFIX
 #
