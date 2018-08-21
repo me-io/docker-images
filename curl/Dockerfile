@@ -22,9 +22,9 @@ ARG OPENSSL_PREFIX
 #
 # Download OpenSSL, verify, build, test, install
 #
-RUN wget -q -O /tmp/${CURL_VER}.tar.gz https://curl.haxx.se/download/${CURL_VER}.tar.gz && \
-    tar xfz /tmp/${CURL_VER}.tar.gz && \
-    cd /tmp/${CURL_VER} && \
+RUN cd /tmp && wget -q -O ${CURL_VER}.tar.gz https://curl.haxx.se/download/${CURL_VER}.tar.gz && \
+    tar xfz ${CURL_VER}.tar.gz && \
+    cd ${CURL_VER} && \
     ldconfig && \
     LDFLAGS="-Wl,-rpath,$OPENSSL_PREFIX/lib -Wl,-rpath,${CURL_PREFIX}/lib" ./configure --with-ssl --prefix=${CURL_PREFIX} && \
     make > /dev/null && \
