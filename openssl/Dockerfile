@@ -20,10 +20,10 @@ ARG OPENSSL_PREFIX
 #
 # Download OpenSSL, verify, build, test, install
 #
-RUN curl -O https://www.openssl.org/source/$OPENSSL_VER.tar.gz && \
-    tar xvfz $OPENSSL_VER.tar.gz && \
-    cd $OPENSSL_VER && \
-    ./config shared --openssldir=$OPENSSL_PREFIX && \
+RUN wget -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/${OPENSSL_VER}.tar.gz && \
+    tar xvfz ${OPENSSL_VER}.tar.gz && \
+    cd ${OPENSSL_VER} && \
+    ./config shared --openssldir=${OPENSSL_PREFIX} && \
     make && \
     # make test && \
     make install && \
@@ -31,4 +31,4 @@ RUN curl -O https://www.openssl.org/source/$OPENSSL_VER.tar.gz && \
     cd .. && \
     echo -e "\n\n" && \
     /usr/local/bin/openssl version -a && \
-    echo -e "\n\nSuccess: Installed $OPENSSL_VER in $OPENSSL_PREFIX\n"
+    echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n"
