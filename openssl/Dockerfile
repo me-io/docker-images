@@ -37,7 +37,6 @@ RUN openssl version -a && \
 
 # Clean-up
 RUN rm -rf /var/lib/apt/* ; \
-    rm -rf /var/lib/dpkg/* ; \
     rm -rf /var/lib/cache/* ; \
     rm -rf /var/lib/log/* ; \
     rm -rf /var/tmp/* ; \
