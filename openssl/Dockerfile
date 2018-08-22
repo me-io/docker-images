@@ -28,11 +28,14 @@ RUN cd /tmp && wget -q -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/$
     ./config shared --openssldir=${OPENSSL_PREFIX} && \
     make > /dev/null && \
     make test && \
-    make install > /dev/null && \
+    # Only install the OpenSSL software components @ https://github.com/openssl/openssl/blob/master/INSTALL
+    make install_sw > /dev/null && \
     ldconfig
 
 RUN openssl version -a && \
     echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n"
 
 # Clean up APT when done.
-RUN apt-get remove --purge -y ${BUILD_PACKAGES} && apt-get autoclean && apt-get autoremove --purge -y && rm -rf /tmp/* /var/tmp/* /var/lib/{apt,dpkg,cache,log}/
+RUN rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
+    rm -rf /var/tmp/* && \
+    rm -rf /tmp/*
