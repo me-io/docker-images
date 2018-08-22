@@ -35,7 +35,8 @@ RUN cd /tmp && wget -q -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/$
 RUN openssl version -a && \
     echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n"
 
-# Cleanup
-RUN  apt-get autoremove -y && apt-get clean && \
-     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-     rm -rf /var/lib/{apt,dpkg,cache,log}
+# Clean-up
+RUN apt-get remove --purge -y ${BUILD_PACKAGES} && \
+    apt-get autoremove -y && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}

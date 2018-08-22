@@ -31,6 +31,7 @@ RUN cd /tmp && wget -q -O ${CURL_VER}.tar.gz https://curl.haxx.se/download/${CUR
     ldconfig && \
     LDFLAGS="-Wl,-rpath,$OPENSSL_PREFIX/lib -Wl,-rpath,${CURL_PREFIX}/lib" ./configure --with-ssl --prefix=${CURL_PREFIX} && \
     make > /dev/null && \
+    # make test && \
     make install > /dev/null && \
     ldconfig
 
@@ -38,7 +39,8 @@ RUN openssl version -a && \
     curl --version && \
     echo -e "\n\nSuccess: Installed ${CURL_VER} in ${CURL_PREFIX}\n"
 
-# Cleanup
-RUN  apt-get autoremove -y && apt-get clean && \
-     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-     rm -rf /var/lib/{apt,dpkg,cache,log}
+# Clean-up
+RUN apt-get remove --purge -y ${BUILD_PACKAGES} && \
+    apt-get autoremove -y && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}
