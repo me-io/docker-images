@@ -36,7 +36,9 @@ RUN openssl version -a && \
     echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n"
 
 # Clean-up
-RUN apt-get remove --purge -y ${BUILD_PACKAGES} && \
-    apt-get autoremove -y && apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}
+RUN rm -rf /var/lib/{apt,dpkg,cache,log}/* && \
+    rm -rf /var/tmp/* && \
+    rm -rf /tmp/* /var/tmp/* && \
+    apt-get remove --purge -y ${BUILD_PACKAGES} && \
+    apt-get autoclean && \
+    apt-get autoremove --purge -y
