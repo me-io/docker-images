@@ -1,6 +1,8 @@
 # Dockerfile
 ARG IMG_NAME
 ARG IMG_TAG
+ARG OPENSSL_VER
+ARG OPENSSL_PREFIX
 
 FROM ${IMG_NAME}:${IMG_TAG}
 MAINTAINER Mohamed Meabed <meabed@me.io>
@@ -15,32 +17,21 @@ ENV BUILD_PACKAGES \
     wget
 
 RUN apt-get update &&  \
-    apt-get -qq install -y ${BUILD_PACKAGES}
-
-ARG OPENSSL_VER
-ARG OPENSSL_PREFIX
-#
-# Download OpenSSL, verify, build, test, install
-# Only install the OpenSSL software components @ https://github.com/openssl/openssl/blob/master/INSTALL
-#
-RUN cd /tmp && wget -q -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/${OPENSSL_VER}.tar.gz && \
+    apt-get -qq install -y ${BUILD_PACKAGES} && \
+    cd /tmp && wget -q -O ${OPENSSL_VER}.tar.gz https://www.openssl.org/source/${OPENSSL_VER}.tar.gz && \
     tar xfz ${OPENSSL_VER}.tar.gz && \
     cd ${OPENSSL_VER} && \
     ./config shared --openssldir=${OPENSSL_PREFIX} && \
     make > /dev/null && \
     make test && \
     make install_sw > /dev/null && \
-    ldconfig
-
-RUN openssl version -a && \
-    echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n"
-
-# Clean-up
-RUN apt-get purge --auto-remove -y ${BUILD_PACKAGES} ;\
-    apt-get autoremove --purge ;\
-    apt-get clean -y
-
-RUN rm -rf /var/lib/apt/* ; \
+    ldconfig && \
+    openssl version -a && \
+    echo -e "\n\nSuccess: Installed ${OPENSSL_VER} in ${OPENSSL_PREFIX}\n" && \
+    apt-get purge --auto-remove -y ${BUILD_PACKAGES} ;\
+    apt-get autoremove --purge -y ;\
+    apt-get clean -y ;\
+    rm -rf /var/lib/apt/* ; \
     rm -rf /var/lib/dpkg/info/* ; \
     rm -rf /var/lib/cache/* ; \
     rm -rf /var/lib/log/* ; \

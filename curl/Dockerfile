@@ -41,7 +41,7 @@ RUN openssl version -a && \
 
 # Clean-up
 RUN apt-get purge --auto-remove -y ${BUILD_PACKAGES} ;\
-    apt-get autoremove --purge ;\
+    apt-get autoremove --purge -y ;\
     apt-get clean -y
 
 RUN rm -rf /var/lib/apt/* ; \
