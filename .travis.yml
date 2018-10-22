@@ -25,6 +25,7 @@ script:
 - openssl/build_ubuntu.sh
 - curl/build_ubuntu.sh
 - curl/build_ubuntu_openssl.sh
+- pm2/build_alpine.sh
 
 
 #after_success:
