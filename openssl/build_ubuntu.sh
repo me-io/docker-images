@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 IMG_NAME="ubuntu"
 IMG_TAG="16.04"
 # https://www.openssl.org/source/
-OPENSSL_VER="openssl-1.1.0i"
+OPENSSL_VER="openssl-1.1.1"
 OPENSSL_PREFIX="/usr/local/ssl"
 # docker hub image_name:tag
 REPO_NAME="meio/ubuntu"

@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 IMG_NAME="ubuntu"
 IMG_TAG="16.04"
 # https://curl.haxx.se/docs/releases.html
-CURL_VER="curl-7.61.0"
+CURL_VER="curl-7.61.1"
 CURL_PREFIX="/usr/local"
 OPENSSL_PREFIX="/usr/local/ssl"
 # docker hub image_name:tag
