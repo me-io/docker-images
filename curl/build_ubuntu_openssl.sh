@@ -3,9 +3,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # https://hub.docker.com/_/ubuntu/
 IMG_NAME="meio/ubuntu"
-IMG_TAG="16.04-openssl-1.1.0i"
+IMG_TAG="16.04-openssl-1.1.1"
 # https://curl.haxx.se/docs/releases.html
-CURL_VER="curl-7.61.0"
+CURL_VER="curl-7.61.1"
 CURL_PREFIX="/usr/local"
 OPENSSL_PREFIX="/usr/local/ssl"
 # docker hub image_name:tag
