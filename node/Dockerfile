@@ -8,7 +8,10 @@ MAINTAINER Mohamed Meabed <meabed@me.io>
 ARG CURL_VER
 ARG NODE_VER
 ARG CURL_PREFIX
+ARG NODE_PREFIX
 ARG OPENSSL_PREFIX
+
+ENV PATH ${NODE_PREFIX}/bin:$PATH
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN export LANG=C.UTF-8 && export LC_ALL=en_US.UTF-8
@@ -34,6 +37,10 @@ RUN apt-get update &&  \
     openssl version -a && \
     curl --version && \
     echo -e "\n\nSuccess: Installed ${CURL_VER} in ${CURL_PREFIX}\n" && \
+    wget -q -O node.tar.gz "https://nodejs.org/dist/v${NODE_VER}/node-v${NODE_VER}-linux-x64.tar.gz" && \
+    mkdir -p ${NODE_PREFIX} && \
+    tar --strip-components=1 -xvzf node.tar.gz -C ${NODE_PREFIX} && \
+    rm node.tar.gz && \
     apt-get purge --auto-remove -y ${BUILD_PACKAGES} ;\
     apt-get autoremove --purge -y ;\
     apt-get clean -y ;\
