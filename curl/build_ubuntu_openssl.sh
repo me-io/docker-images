@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
+GIT_TAG=`git describe --tags --always --dirty`
+# build only tag branch master
+if [[ ${GIT_TAG} =~ ^master$ ]]; then
+    true
+    echo "TAG: ${GIT_TAG} - start build"
+else
+    echo "TAG: ${GIT_TAG} - skip build"
+    exit 0
+fi
+
 # https://hub.docker.com/_/ubuntu/
 IMG_NAME="meio/ubuntu"
 IMG_TAG="16.04-openssl-1.1.1"

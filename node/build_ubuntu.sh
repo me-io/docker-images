@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
+GIT_TAG=`git describe --tags --always --dirty`
+# build only tag branch master
+if [[ ${GIT_TAG} =~ ^master$ ]]; then
+    true
+    echo "TAG: ${GIT_TAG} - start build"
+else
+    echo "TAG: ${GIT_TAG} - skip build"
+    exit 0
+fi
+
 # https://hub.docker.com/_/ubuntu/
 IMG_NAME="ubuntu"
 IMG_TAG="16.04"
@@ -19,6 +29,8 @@ then
     echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 fi
 
+echo ${REPO_NAME}:${REPO_TAG}
+exit
 TAG_EXIST=`curl -s "https://hub.docker.com/v2/repositories/${REPO_NAME}/tags/${REPO_TAG}/" | grep '"id":'`
 
 if [[ ! -z ${TAG_EXIST} ]]; then
