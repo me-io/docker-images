@@ -1,14 +1,17 @@
 <p align="center">
   <h2 align="center">Docker Images</h2>
   <p align="center">
-      <a href="https://travis-ci.org/me-io/docker-images">
+    <a href="https://travis-ci.org/me-io/docker-images">
         <img src="https://travis-ci.org/me-io/docker-images.svg?branch=master" alt="Build Status">
-      </a>
-    <a href="LICENSE.md">
-      <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License">
     </a>
-    <a href="https://www.paypal.me/meabed">
-      <img src="https://img.shields.io/badge/paypal-Buy_Me_Coffee-179BD7.svg?style=flat-squares" alt="Buy Me Coffee">
+    <a href="https://hub.docker.com/r/meio/ubuntu">
+        <img src="https://shields.beevelop.com/docker/pulls/meio/ubuntu.svg?style=flat-square" alt="Docker Pulls">
+    </a>
+    <a href="https://hub.docker.com/r/meio/">
+        <img src="https://img.shields.io/badge/docker-HUB-blue.svg?style=flat-square" alt="Docker Hub">
+    </a>
+    <a href="LICENSE.md">
+        <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License">
     </a>
   </p>
 </p>

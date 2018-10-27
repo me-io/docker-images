@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-GIT_TAG=`git describe --tags --always --dirty`
+## todo fix
+## convert it to node image from ubuntu:tags, not ubuntu
+GIT_TAG=`git rev-parse --abbrev-ref HEAD`
 # build only tag branch master
 if [[ ${GIT_TAG} =~ ^master$ ]]; then
     true
@@ -29,8 +31,6 @@ then
     echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 fi
 
-echo ${REPO_NAME}:${REPO_TAG}
-exit
 TAG_EXIST=`curl -s "https://hub.docker.com/v2/repositories/${REPO_NAME}/tags/${REPO_TAG}/" | grep '"id":'`
 
 if [[ ! -z ${TAG_EXIST} ]]; then
