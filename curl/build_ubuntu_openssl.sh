@@ -3,7 +3,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 GIT_TAG=`git describe --tags --always --dirty`
 # build only tag branch master
-if [[ ${GIT_TAG} =~ ^master$ ]]; then
+if [[ ${GIT_TAG} =~ ^master$ || ${TRAVIS_BRANCH} =~ ^master$ ]]; then
     true
     echo "TAG: ${GIT_TAG} - start build"
 else

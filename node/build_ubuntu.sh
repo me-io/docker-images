@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 ## convert it to node image from ubuntu:tags, not ubuntu
 GIT_TAG=`git rev-parse --abbrev-ref HEAD`
 # build only tag branch master
-if [[ ${GIT_TAG} =~ ^master$ ]]; then
+if [[ ${GIT_TAG} =~ ^master$ || ${TRAVIS_BRANCH} =~ ^master$ ]]; then
     true
     echo "TAG: ${GIT_TAG} - start build"
 else
