@@ -24,6 +24,7 @@ RUN apk add --update \
     make \
     autoconf \
     automake \
+    python \
   && rm -rf /var/cache/apk/*
 
 # Install pm2
