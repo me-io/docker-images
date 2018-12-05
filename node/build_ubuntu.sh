@@ -20,7 +20,7 @@ IMG_TAG="16.04"
 CURL_VER="curl-7.61.1"
 CURL_PREFIX="/usr/local"
 OPENSSL_PREFIX="/usr/local/ssl"
-NODE_VER="11.0.0"
+NODE_VER="11.3.0"
 NODE_PREFIX="/usr/local/node"
 # docker hub image_name:tag
 REPO_NAME="meio/ubuntu"

@@ -13,7 +13,7 @@ fi
 
 # https://hub.docker.com/_/ubuntu/
 IMG_NAME="node"
-IMG_TAG="11.1.0-alpine"
+IMG_TAG="11.3.0-alpine"
 MOZ_TAG="v3.3.1"
 
 # docker hub image_name:tag
